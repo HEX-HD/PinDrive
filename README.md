@@ -5,7 +5,9 @@
 
 - **Team Identifier**: `HEX` *(블라인드 심사 원칙에 따라 개발자 실명·소속·개인 연락처 미기재)*
 - **Target Platform**: Hyundai Motor Group **Pleos Connect** (Android Automotive OS / API 29+)
-- **Release APK**: [`apk/HEX_PinDrive_release.apk`](./apk/HEX_PinDrive_release.apk) *(또는 GitHub Releases `v1.0.0` 참조)*
+- **Release APK**: [`apk/HEX_PinDrive_release.apk`](./apk/HEX_PinDrive_release.apk) *(또는 [GitHub Releases `v1.0.0`](https://github.com/HEX-HD/PinDrive/releases/tag/v1.0.0))*
+- **Live Web Simulator (1920×1080 즉시 체험)**: [https://hex-hd.github.io/PinDrive/](https://hex-hd.github.io/PinDrive/)
+- **Demo Video (시연 영상)**: [Google Drive 시연 영상 보기](https://drive.google.com/file/d/10eI4YSAQuMbOj9dQ1PfHge1fO3Y8mzk6/view?usp=sharing)
 
 ---
 
