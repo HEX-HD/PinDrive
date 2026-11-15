@@ -1,0 +1,83 @@
+name: Build & Publish HEX_PinDrive_release.apk
+
+on:
+  push:
+    branches: [ "main", "master" ]
+    paths-ignore:
+      - "apk/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-release-apk:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Set up Gradle 8.9
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.9"
+
+      - name: Generate Contest Release Keystore
+        run: |
+          mkdir -p keystore
+          keytool -genkeypair -v \
+            -keystore keystore/contest-release.jks \
+            -keyalg RSA -keysize 2048 -validity 10000 \
+            -alias hexkey \
+            -storepass hexpindrive2026 \
+            -keypass hexpindrive2026 \
+            -dname "CN=HEX, OU=Mobility, O=HEX, L=Seoul, S=Seoul, C=KR"
+
+      - name: Run Unit Tests & Assemble Signed Release APK
+        run: |
+          gradle test assembleRelease --no-daemon
+          mkdir -p apk
+          cp app/build/outputs/apk/release/app-release.apk apk/HEX_PinDrive_release.apk
+          ls -lh apk/HEX_PinDrive_release.apk
+
+      - name: Upload Release APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HEX_PinDrive_release
+          path: apk/HEX_PinDrive_release.apk
+
+      - name: Commit apk/HEX_PinDrive_release.apk to Repository
+        run: |
+          git config user.name "HEX"
+          git config user.email "hex@users.noreply.github.com"
+          git add -f apk/HEX_PinDrive_release.apk
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(release): update apk/HEX_PinDrive_release.apk [skip ci]"
+            git push origin HEAD:${GITHUB_REF_NAME}
+          fi
+
+      - name: Publish GitHub Release v1.0.0
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.0
+          name: "PinDrive v1.0.0 (Pleos App Market Contest Release)"
+          body: |
+            ## PinDrive (핀드라이브) — Team HEX
+            운전 중 무터치(Zero-Touch) 차량 이상 증상 15초 텔레메트리 스냅샷 & 속도 비례 역산 로드 북마커
+            - 실행 파일: `HEX_PinDrive_release.apk` (AAOS 에뮬레이터 및 Android 10+ 기기 호환)
+          files: apk/HEX_PinDrive_release.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
