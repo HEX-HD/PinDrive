@@ -7,7 +7,7 @@
 - **Target Platform**: Hyundai Motor Group **Pleos Connect** (Android Automotive OS / API 29+)
 - **Release APK**: [`apk/HEX_PinDrive_release.apk`](./apk/HEX_PinDrive_release.apk) *(또는 [GitHub Releases `v1.0.0`](https://github.com/HEX-HD/PinDrive/releases/tag/v1.0.0))*
 - **Live Web Simulator (1920×1080 즉시 체험)**: [https://hex-hd.github.io/PinDrive/](https://hex-hd.github.io/PinDrive/)
-- **Demo Video (시연 영상)**: [Google Drive 시연 영상 보기](https://drive.google.com/file/d/10eI4YSAQuMbOj9dQ1PfHge1fO3Y8mzk6/view?usp=sharing)
+- **Demo Video (시연 영상)**: [Google Drive 시연 영상 보기](https://drive.google.com/file/d/13E9fzjVYIsCmOaWyF4OOUt9NmgFewxWW/view?usp=sharing)
 
 ---
 
@@ -63,7 +63,7 @@
 3. 앱 실행 후 좌측 패널의 **`Care Pin 음성 발화`**, **`Life Pin 음성 발화 (-70m)`** 버튼으로 주행 중 무터치 캡처와 TTS 응답을 확인하고, **`P단 정차 전환`** 버튼을 눌러 정비 스냅샷 QR 리포트 및 내비게이션 연동 동작을 확인합니다.
 
 ### 방법 B. 대화면 웹 인터랙티브 시뮬레이터 실행 (설치 불필요)
-- `docs/index.html` 파일을 Chrome / Edge 브라우저(1920×1080 전체화면 권장)에서 열면 `Space` 키 하나로 **40초 전체 시나리오 자동 시연**을 즉시 확인할 수 있습니다.
+- `docs/index.html` 또는 [https://hex-hd.github.io/PinDrive/](https://hex-hd.github.io/PinDrive/) 를 Chrome / Edge 브라우저(1920×1080 전체화면 권장)에서 열면 `Space` 키 하나로 **60초 전체 시나리오 자동 시연**, 실시간 마이크 STT 발화, 정비사 QR 스캔 문진표 미리보기를 즉시 확인할 수 있습니다.
 
 ### 방법 C. 소스코드 빌드 및 유닛 테스트 실행
 - JDK 17 및 Gradle 8.9 환경에서 아래 명령으로 핵심 엔진 테스트(`PinDriveEngineTest`) 및 APK 빌드가 가능합니다.
